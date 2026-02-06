@@ -1,5 +1,6 @@
 package com.svalero.tienda.tienda;
 
+import com.svalero.tienda.tienda.dao.ProductoDAO;
 import com.svalero.tienda.tienda.model.Clientes;
 import com.svalero.tienda.tienda.model.Pedidos;
 import com.svalero.tienda.tienda.model.Productos;
@@ -136,6 +137,10 @@ public class AppController {
         productosList.add(producto);
         showStatus("Producto añadido correctamente", 5);
 
+        // Añadir BD (DAO)
+        ProductoDAO dao = new ProductoDAO();
+        dao.insert(producto);
+
         desactivarCamposProductos();
 
         pGuardarButton.setDisable(true);
@@ -143,6 +148,7 @@ public class AppController {
         pModificarButton.setDisable(false);
         limpiarCamposProductos();
 
+        refreshProductos();
     }
 
 
@@ -217,6 +223,13 @@ public class AppController {
         pStockCheckBox.setSelected(false);
         pDescripcionTArea.setText("");
 
+    }
+
+    private void refreshProductos() {
+        pListView.getItems().clear();
+        for (Productos productos : productosList) {
+            pListView.getItems().add(productos.getNombre());
+        }
     }
 
 
