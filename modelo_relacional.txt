@@ -1,0 +1,5 @@
+Productos [#id, nombre, tipo, precio, stock, descripcion]
+Pedidos [#id, numero_pedido, entregado, fecha_pedido, precio, observaciones, -id_Cliente]
+Clientes [#id, nombre, apellidos, fecha_nacimiento, email, telefono]
+
+Producto_pedido [#(-id_Producto, -id_Pedido)]
