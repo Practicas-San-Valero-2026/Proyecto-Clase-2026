@@ -131,7 +131,8 @@ public class AppController {
         boolean stock = pStockCheckBox.isSelected();
         String descripcion = pDescripcionTArea.getText();
 
-        Productos producto = new Productos(nombre, tipo, precio, stock, descripcion);
+        int id = Integer.parseInt(pPrecioField.getText());
+        Productos producto = new Productos(id, nombre, tipo, precio, stock, descripcion);
         productosList.add(producto);
         showStatus("Producto añadido correctamente", 5);
 
