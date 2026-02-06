@@ -55,7 +55,7 @@ public class ClienteDAO {
 
         // Conexión
         String sql = """
-                INSERT INTO clientes (nombre, apellidos, fechaNacimiento, email, telefono)
+                INSERT INTO clientes (nombre, apellidos, fecha_nacimiento, email, telefono)
                 VALUES (?, ?, ?, ?, ?)
                 """;
 
@@ -116,7 +116,7 @@ public class ClienteDAO {
         // Conexión
         String sql = """
                 UPDATE clientes
-                SET nombre = ?, apellidos = ?, fechaNacimiento = ?, email = ?, telefono = ?
+                SET nombre = ?, apellidos = ?, fecha_nacimiento = ?, email = ?, telefono = ?
                 WHERE id = ?
                 """;
 
@@ -140,7 +140,7 @@ public class ClienteDAO {
             return true;
 
         } catch (SQLException e) {
-            System.err.println("Error al insertar cliente");
+            System.err.println("Error al editar cliente");
             e.printStackTrace();
             return false;
         }

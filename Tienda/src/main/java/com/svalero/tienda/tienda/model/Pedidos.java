@@ -10,14 +10,20 @@ public class Pedidos {
     private LocalDate fechaPedido;
     private float precio;
     private String observaciones;
+    private int idCliente;
 
-    public Pedidos(int id, String numPedido, boolean entregado, LocalDate fechaPedido, float precio, String observaciones) {
+    public Pedidos(int id, String numPedido, boolean entregado, LocalDate fechaPedido, float precio, String observaciones, int idCliente) {
         this.id = id;
         this.numPedido = numPedido;
         this.entregado = entregado;
         this.fechaPedido = fechaPedido;
         this.precio = precio;
         this.observaciones = observaciones;
+        this.idCliente = idCliente;
+    }
+
+    public Pedidos() {
+
     }
 
     public int getId() { return id; }
@@ -63,4 +69,8 @@ public class Pedidos {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
+
+    public int getIdCliente() { return idCliente; }
+
+    public void setIdCliente(int idCliente) { this.idCliente = idCliente; }
 }

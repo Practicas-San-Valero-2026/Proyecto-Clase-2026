@@ -132,7 +132,7 @@ public class ProductoDAO {
             return true;
 
         } catch (SQLException e) {
-            System.err.println("Error al insertar producto");
+            System.err.println("Error al editar producto");
             e.printStackTrace();
             return false;
         }
