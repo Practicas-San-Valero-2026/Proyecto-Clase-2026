@@ -3,6 +3,7 @@ package com.svalero.tienda.tienda;
 import com.svalero.tienda.tienda.model.Clientes;
 import com.svalero.tienda.tienda.model.Pedidos;
 import com.svalero.tienda.tienda.model.Productos;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -28,7 +29,7 @@ public class AppController {
     @FXML
     private CheckBox pStockCheckBox;
     @FXML
-    private TextField pDescripcionTArea;
+    private TextArea pDescripcionTArea;
     @FXML
     private Button pNuevoButton;
     @FXML
@@ -86,6 +87,68 @@ public class AppController {
     private ListView cListView;
 
 
+    @FXML
+    protected void nuevoProducto(ActionEvent event) {
 
+    }
+
+    @FXML
+    protected void guardarProducto(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void modificarProducto(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void eliminarProducto(ActionEvent event) {
+
+    }
+
+
+
+    @FXML
+    protected void nuevoPedido(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void guardarPedido(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void modificarPedido(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void eliminarPedido(ActionEvent event) {
+
+    }
+
+
+
+    @FXML
+    protected void nuevoCliente(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void guardarCliente(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void modificarCliente(ActionEvent event) {
+
+    }
+
+    @FXML
+    protected void eliminarCliente(ActionEvent event) {
+
+    }
 
 }
