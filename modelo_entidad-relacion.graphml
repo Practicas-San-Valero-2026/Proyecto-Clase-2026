@@ -590,7 +590,7 @@
 			<data key="d0">22</data>
 			<data key="d4">
 				<x:List>
-					<y:Label Text="email" LayoutParameter="{y:GraphMLReference 8}">
+					<y:Label Text="fechaNacimiento" LayoutParameter="{y:GraphMLReference 8}">
 						<y:Label.Style>
 							<yjs:LabelStyle verticalTextAlignment="CENTER" horizontalTextAlignment="CENTER" font="{y:GraphMLReference 6}" textFill="{y:GraphMLReference 7}"/>
 						</y:Label.Style>
