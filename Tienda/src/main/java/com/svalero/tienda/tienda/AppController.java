@@ -3,6 +3,7 @@ package com.svalero.tienda.tienda;
 import com.svalero.tienda.tienda.model.Clientes;
 import com.svalero.tienda.tienda.model.Pedidos;
 import com.svalero.tienda.tienda.model.Productos;
+import com.svalero.tienda.tienda.model.Vista;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -18,6 +19,30 @@ public class AppController {
         clientesList = new ArrayList<>();
     }
 
+    @FXML
+    private TableView<Vista> pedTableView;
+    @FXML
+    private TableColumn<Vista,String> vNumeroPedido;
+    @FXML
+    private TableColumn<Vista,String> vEntregado;
+    @FXML
+    private TableColumn<Vista,String> vFechaPedido;
+    @FXML
+    private TableColumn<Vista,String> vPrecio;
+    @FXML
+    private TableColumn<Vista,String> vObservaciones;
+    @FXML
+    private TableView<Vista> cliTableView;
+    @FXML
+    private TableColumn<Vista,String> vNombre;
+    @FXML
+    private TableColumn<Vista,String> Vapellidos;
+    @FXML
+    private TableColumn<Vista,String> vFechaNacimiento;
+    @FXML
+    private TableColumn<Vista,String> vEmail;
+    @FXML
+    private TableColumn<Vista,String> vTelefono;
 
     private List<Productos> productosList;
     @FXML
