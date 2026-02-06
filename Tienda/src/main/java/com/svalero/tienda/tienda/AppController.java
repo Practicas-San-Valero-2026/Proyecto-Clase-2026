@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,8 +159,7 @@ public class AppController {
         boolean stock = pStockCheckBox.isSelected();
         String descripcion = pDescripcionTArea.getText();
 
-        int id = Integer.parseInt(pPrecioField.getText());
-        Productos producto = new Productos(id, nombre, tipo, precio, stock, descripcion);
+        Productos producto = new Productos(nombre, tipo, precio, stock, descripcion);
         productosList.add(producto);
         showStatus("Producto añadido correctamente", 5);
 
@@ -239,7 +239,8 @@ public class AppController {
 
         //Eliminar de la base de datos (DAO)
         ProductoDAO dao = new ProductoDAO();
-        dao.delete(selected.getId());
+        // TODO pasar id
+        dao.deleteById(Productos.getId());
 
         refreshProductos();
         limpiarCamposProductos();
