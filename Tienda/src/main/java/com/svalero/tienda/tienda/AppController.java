@@ -305,6 +305,15 @@ public class AppController {
     @FXML
     protected void nuevoPedido(ActionEvent event) {
 
+        pedNuevoButton.setDisable(true);
+        pedModificarButton.setDisable(false);
+        pedGuardarButton.setDisable(false);
+        pedEliminarButton.setDisable(false);
+
+        activarCamposPedidos();
+        limpiarCamposPedidos();
+        pedNumField.requestFocus();
+
     }
 
     @FXML
@@ -319,6 +328,34 @@ public class AppController {
 
     @FXML
     protected void eliminarPedido(ActionEvent event) {
+
+    }
+
+    // activar campos de pedidos
+    private void activarCamposPedidos() {
+        pedNumField.setEditable(true);
+        pedPrecioField.setEditable(true);
+        pedObsTArea.setEditable(true);
+        pedEntregadoCheckBox.setDisable(false);
+        pedFechaDatePicker.setDisable(false);
+    }
+
+    // desactivar campos de pedidos
+    private void desactivarCamposPedidos() {
+        pedNumField.setEditable(false);
+        pedPrecioField.setEditable(false);
+        pedObsTArea.setEditable(false);
+        pedEntregadoCheckBox.setDisable(true);
+        pedFechaDatePicker.setDisable(true);
+    }
+
+    // Limpiar campos de pedidos
+    private void limpiarCamposPedidos() {
+        pedNumField.setText("");
+        pedPrecioField.setText("");
+        pedObsTArea.setText("");
+        pedEntregadoCheckBox.setSelected(false);
+        pedFechaDatePicker.setEditable(false);
 
     }
 
