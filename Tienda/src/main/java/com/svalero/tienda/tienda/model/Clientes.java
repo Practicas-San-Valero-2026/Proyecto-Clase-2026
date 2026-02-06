@@ -20,6 +20,10 @@ public class Clientes {
         this.telefono = telefono;
     }
 
+    public Clientes() {
+
+    }
+
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }

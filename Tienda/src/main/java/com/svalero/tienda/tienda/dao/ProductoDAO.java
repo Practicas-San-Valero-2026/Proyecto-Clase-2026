@@ -96,7 +96,7 @@ public class ProductoDAO {
             return true;
 
         } catch (SQLException e) {
-            System.err.println("Error al borrar el libro");
+            System.err.println("Error al borrar el producto");
             e.printStackTrace();
             return false;
         }
@@ -107,7 +107,6 @@ public class ProductoDAO {
 
         // Validaciones
         if (p == null) return false;
-        if (p.getNombre() == null || p.getNombre().trim().isEmpty()) return false;
 
         // Conexión
         String sql = """
