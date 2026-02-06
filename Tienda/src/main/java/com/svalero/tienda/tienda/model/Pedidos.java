@@ -4,19 +4,25 @@ import java.time.LocalDate;
 
 public class Pedidos {
 
+    private int id;
     private String numPedido;
     private boolean entregado;
     private LocalDate fechaPedido;
     private float precio;
     private String observaciones;
 
-    public Pedidos(String numPedido, boolean entregado, LocalDate fechaPedido, float precio, String observaciones) {
+    public Pedidos(int id, String numPedido, boolean entregado, LocalDate fechaPedido, float precio, String observaciones) {
+        this.id = id;
         this.numPedido = numPedido;
         this.entregado = entregado;
         this.fechaPedido = fechaPedido;
         this.precio = precio;
         this.observaciones = observaciones;
     }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getNumPedido() {
         return numPedido;
