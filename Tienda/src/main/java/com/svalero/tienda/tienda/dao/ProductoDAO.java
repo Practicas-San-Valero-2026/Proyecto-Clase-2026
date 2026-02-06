@@ -46,11 +46,11 @@ public class ProductoDAO {
     }
 
     // CREATE: nuevo producto
-    public boolean insert(Productos p) {
+    public int insert(Productos p) {
 
         // Validaciones
-        if (p == null) return false;
-        if (p.getNombre() == null || p.getNombre().trim().isEmpty()) return false;
+        if (p == null) return -1;
+        if (p.getNombre() == null || p.getNombre().trim().isEmpty()) return -1;
 
         // Conexión
         String sql = """
@@ -59,7 +59,7 @@ public class ProductoDAO {
                 """;
 
         try (Connection con = BaseDatos.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql)) {
+            PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Rellenar los ? en orden
             ps.setString(1, p.getNombre());
@@ -69,16 +69,23 @@ public class ProductoDAO {
             ps.setString(5, p.getDescripcion());
 
             // Ejecutar insertar
-            ps.executeUpdate();
+            int filas = ps.executeUpdate();
 
-            return true;
+            // Recuperar id
+            if (filas == 1) {
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    if (keys.next()) {
+                        return keys.getInt(1); // id generado
+                    }
+                }
+            }
 
         } catch (SQLException e) {
             System.err.println("Error al insertar producto");
             e.printStackTrace();
         }
 
-        return false;
+        return -1;
     }
 
     // DELETE: borrar producto

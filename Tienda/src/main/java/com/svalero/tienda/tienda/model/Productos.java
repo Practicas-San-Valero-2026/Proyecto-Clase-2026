@@ -18,6 +18,14 @@ public class Productos {
         this.descripcion = descripcion;
     }
 
+    public Productos(String nombre, String tipo, float precio, boolean stock, String descripcion) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.precio = precio;
+        this.stock = stock;
+        this.descripcion = descripcion;
+    }
+
     public Productos(){
 
     };
