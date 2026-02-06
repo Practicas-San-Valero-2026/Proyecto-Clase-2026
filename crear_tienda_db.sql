@@ -32,7 +32,7 @@ create table if not exists pedidos (
 	
 	foreign key (id_cliente) references clientes (id)
 		on update cascade
-		on delete restrict
+		on delete cascade
 ) engine=InnoDB;
 
 -- Tabla intermedia: Productos_pedidos
@@ -45,5 +45,5 @@ create table if not exists producto_pedido (
 		on delete restrict,
 	foreign key (id_pedido) references pedidos (id)
 		on update cascade
-		on delete restrict
+		on delete cascade
 ) engine=InnoDB;
