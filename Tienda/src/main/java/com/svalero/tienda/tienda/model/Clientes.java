@@ -4,19 +4,25 @@ import java.time.LocalDate;
 
 public class Clientes {
 
+    private int id;
     private String nombre;
     private String apellidos;
     private LocalDate fechaNacimiento;
     private String email;
     private int telefono;
 
-    public Clientes(String nombre, String apellidos, LocalDate fechaNacimiento, String email, int telefono) {
+    public Clientes(int id, String nombre, String apellidos, LocalDate fechaNacimiento, String email, int telefono) {
+        this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.email = email;
         this.telefono = telefono;
     }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getNombre() {
         return nombre;

@@ -2,19 +2,29 @@ package com.svalero.tienda.tienda.model;
 
 public class Productos {
 
+    private int id;
     private String nombre;
     private String tipo;
     private float precio;
     private boolean stock;
     private String descripcion;
 
-    public Productos(String nombre, String tipo, float precio, boolean stock, String descripcion) {
+    public Productos(int id, String nombre, String tipo, float precio, boolean stock, String descripcion) {
+        this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.precio = precio;
         this.stock = stock;
         this.descripcion = descripcion;
     }
+
+    public Productos(){
+
+    };
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getNombre() {
         return nombre;
