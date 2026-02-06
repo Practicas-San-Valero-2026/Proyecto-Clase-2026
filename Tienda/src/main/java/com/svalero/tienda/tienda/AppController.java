@@ -90,10 +90,21 @@ public class AppController {
     @FXML
     protected void nuevoProducto(ActionEvent event) {
 
+        pNuevoButton.setDisable(true);
+        pModificarButton.setDisable(false);
+        pGuardarButton.setDisable(false);
+        pEliminarButton.setDisable(false);
+
+        activarCamposProductos();
+        limpiarCamposProductos();
+        pNombreField.requestFocus();
+
     }
 
     @FXML
     protected void guardarProducto(ActionEvent event) {
+
+
 
     }
 
@@ -104,6 +115,24 @@ public class AppController {
 
     @FXML
     protected void eliminarProducto(ActionEvent event) {
+
+    }
+
+    // activar campos de productos
+    private void activarCamposProductos() {
+        pNombreField.setEditable(true);
+        pTipoField.setEditable(true);
+        pPrecioField.setEditable(true);
+        pStockCheckBox.setDisable(false);
+        pDescripcionTArea.setEditable(true);
+    }
+
+    // Limpiar campos de productos
+    private void limpiarCamposProductos() {
+        pNombreField.setText("");
+        pPrecioField.setText("");
+        pTipoField.setText("");
+        pDescripcionTArea.setText("");
 
     }
 
