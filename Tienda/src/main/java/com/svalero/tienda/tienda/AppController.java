@@ -9,6 +9,7 @@ import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class AppController {
     @FXML
     private Button pEliminarButton;
     @FXML
-    private ListView pListView;
+    private ListView<Productos> pListView;
 
 
     private List<Pedidos> pedidosList;
@@ -177,22 +178,17 @@ public class AppController {
     }
 
 
+
     @FXML
     protected void modificarProducto(ActionEvent event) {
-
-        pModificarButton.setDisable(false);
-        Productos selected = (Productos) pListView.getSelectionModel().getSelectedItem();
+        Productos selected = pListView.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Selecciona un producto de la tabla para modificarlo");
-            alert.show();
+            new Alert(Alert.AlertType.WARNING, "Selecciona un producto para modificar").show();
             return;
         }
 
         if (pNombreField.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("El nombre del producto es obligatorio");
-            alert.show();
+            new Alert(Alert.AlertType.ERROR, "El nombre es obligatorio").show();
             return;
         }
 
@@ -200,27 +196,77 @@ public class AppController {
         try {
             precio = Float.parseFloat(pPrecioField.getText());
         } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("El precio debe ser un número válido");
-            alert.show();
+            new Alert(Alert.AlertType.ERROR, "El precio debe ser un número válido").show();
             return;
         }
 
         selected.setNombre(pNombreField.getText());
         selected.setTipo(pTipoField.getText());
-        selected.setPrecio(Float.parseFloat(pPrecioField.getText()));
+        selected.setPrecio(precio);
         selected.setStock(pStockCheckBox.isSelected());
         selected.setDescripcion(pDescripcionTArea.getText());
 
-        productosList.reversed();
-        showStatus("Producto modificado correctamente", 5);
+        ProductoDAO dao = new ProductoDAO();
+        dao.update(selected); // TODO HAY QUE IMPLEMENTARLO
 
+        refreshProductos();
+        pListView.getSelectionModel().select(selected);
+        showStatus("Producto modificado correctamente", 5);
     }
+
 
     @FXML
     protected void eliminarProducto(ActionEvent event) {
 
+        Productos selected = pListView.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            new Alert(Alert.AlertType.WARNING, "Selecciona un producto para eliminar").show();
+            return;
+        }
+
+        // Confirmación
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirmar eliminación");
+        confirm.setHeaderText(null);
+        confirm.setContentText("¿Seguro que quieres eliminar el producto: " + selected.getNombre() + "?");
+
+        if (confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) {
+            return;
+        }
+
+        productosList.remove(selected);
+
+        //Eliminar de la base de datos (DAO)
+        ProductoDAO dao = new ProductoDAO();
+        dao.delete(selected.getId());
+
+        refreshProductos();
+        limpiarCamposProductos();
+        desactivarCamposProductos();
+
+        showStatus("Producto eliminado correctamente", 5);
     }
+
+
+    @FXML
+    protected void productosClick(MouseEvent event) {
+        Productos p = pListView.getSelectionModel().getSelectedItem();
+        if (p == null) return;
+
+        activarCamposProductos();
+        pNombreField.setText(p.getNombre());
+        pTipoField.setText(p.getTipo());
+        pPrecioField.setText(String.valueOf(p.getPrecio()));
+        pStockCheckBox.setSelected(p.isStock());
+        pDescripcionTArea.setText(p.getDescripcion());
+
+        // habilitar botones para edición
+        pModificarButton.setDisable(false);
+        pEliminarButton.setDisable(false);
+        pGuardarButton.setDisable(true);
+    }
+
 
     // activar campos de productos
     private void activarCamposProductos() {
@@ -251,12 +297,8 @@ public class AppController {
     }
 
     private void refreshProductos() {
-        pListView.getItems().clear();
-        for (Productos productos : productosList) {
-            pListView.getItems().add(productos.getNombre());
-        }
+        pListView.getItems().setAll(productosList);
     }
-
 
 
     // BOTONES PEDIDOS

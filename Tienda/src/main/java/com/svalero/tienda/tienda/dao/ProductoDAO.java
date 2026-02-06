@@ -137,4 +137,7 @@ public class ProductoDAO {
             return false;
         }
     }
+
+    public void delete(int id) {
+    }
 }
