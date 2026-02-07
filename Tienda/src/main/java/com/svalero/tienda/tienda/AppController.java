@@ -373,7 +373,7 @@ public class AppController implements Initializable {
         String obs = pedObsTArea.getText();
         int idCliente = Integer.parseInt(idClienteField.getText());
 
-        Pedidos pedido = new Pedidos(0, numPedido, entregado, fecha, precio, obs, idCliente);
+        Pedidos pedido = new Pedidos(numPedido, entregado, fecha, precio, obs, idCliente);
 
         PedidoDAO dao = new PedidoDAO();
         int nuevoId = dao.insert(pedido);
