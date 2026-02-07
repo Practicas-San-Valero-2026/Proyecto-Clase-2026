@@ -189,7 +189,6 @@ public class AppController implements Initializable {
         String descripcion = pDescripcionTArea.getText();
 
         Productos producto = new Productos(0, nombre, tipo, precio, stock, descripcion);
-        productosList.add(producto);
         showStatus("Producto añadido correctamente", 5);
 
         // Añadir BD (DAO)
@@ -243,15 +242,14 @@ public class AppController implements Initializable {
         selected.setDescripcion(pDescripcionTArea.getText());
 
         ProductoDAO dao = new ProductoDAO();
-        boolean ok = dao.update(selected); // TODO HAY QUE IMPLEMENTARLO
-
+        boolean ok = dao.update(selected);
         if (!ok) {
             new Alert(Alert.AlertType.ERROR, "No se pudo actualizar el producto").show();
             return;
         }
-
         pListView.refresh();
         showStatus("Producto modificado correctamente", 5);
+
     }
 
 
