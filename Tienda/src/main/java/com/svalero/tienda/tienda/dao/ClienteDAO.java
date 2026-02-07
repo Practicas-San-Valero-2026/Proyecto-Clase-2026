@@ -60,7 +60,7 @@ public class ClienteDAO {
                 """;
 
         try (Connection con = BaseDatos.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Rellenar los ? en orden
             ps.setString(1, c.getNombre());
@@ -140,6 +140,7 @@ public class ClienteDAO {
             }
             ps.setString(4, c.getEmail());
             ps.setInt(5, c.getTelefono());
+            ps.setInt(6, c.getId());
 
             // Ejecutar insertar
             ps.executeUpdate();

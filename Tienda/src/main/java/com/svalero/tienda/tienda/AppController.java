@@ -120,7 +120,7 @@ public class AppController implements Initializable {
     @FXML
     private Button pedEliminarButton;
     @FXML
-    private ListView pedListView;
+    private ListView<Pedidos> pedListView;
     private ObservableList<Pedidos> pedidosList = FXCollections.observableArrayList();
 
 
@@ -144,7 +144,7 @@ public class AppController implements Initializable {
     @FXML
     private Button cEliminarButton;
     @FXML
-    private ListView cListView;
+    private ListView<Clientes> cListView;
     private ObservableList<Clientes> clientesList = FXCollections.observableArrayList();
 
 
@@ -243,9 +243,14 @@ public class AppController implements Initializable {
         selected.setDescripcion(pDescripcionTArea.getText());
 
         ProductoDAO dao = new ProductoDAO();
-        int id = dao.insert(selected); // TODO HAY QUE IMPLEMENTARLO
+        boolean ok = dao.update(selected); // TODO HAY QUE IMPLEMENTARLO
 
-        pListView.getSelectionModel().select(selected);
+        if (!ok) {
+            new Alert(Alert.AlertType.ERROR, "No se pudo actualizar el producto").show();
+            return;
+        }
+
+        pListView.refresh();
         showStatus("Producto modificado correctamente", 5);
     }
 
@@ -371,7 +376,13 @@ public class AppController implements Initializable {
         boolean entregado = pedEntregadoCheckBox.isSelected();
         LocalDate fecha = pedFechaDatePicker.getValue();
         String obs = pedObsTArea.getText();
-        int idCliente = Integer.parseInt(idClienteField.getText());
+        int idCliente;
+        try {
+            idCliente = Integer.parseInt(idClienteField.getText());
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "El id del cliente debe ser un número").show();
+            return;
+        }
 
         Pedidos pedido = new Pedidos(numPedido, entregado, fecha, precio, obs, idCliente);
 

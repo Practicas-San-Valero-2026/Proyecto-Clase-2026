@@ -31,7 +31,7 @@ public class PedidoDAO {
 
                 p.setId(rs.getInt("id"));
                 p.setNumPedido(rs.getString("numero_pedido"));
-                p.setPrecio(rs.getInt("precio"));
+                p.setPrecio(rs.getFloat("precio"));
                 Date fechaSql = rs.getDate("fecha_pedido");
                 if (fechaSql != null) {
                     p.setFechaPedido(fechaSql.toLocalDate());
@@ -65,7 +65,7 @@ public class PedidoDAO {
                 """;
 
         try (Connection con = BaseDatos.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Rellenar los ? en orden
             ps.setString(1, p.getNumPedido());
