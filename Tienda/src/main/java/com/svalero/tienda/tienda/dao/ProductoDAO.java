@@ -2,6 +2,7 @@ package com.svalero.tienda.tienda.dao;
 
 import com.svalero.tienda.tienda.basedatos.BaseDatos;
 import com.svalero.tienda.tienda.model.Productos;
+import org.mariadb.jdbc.Statement;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,11 +47,11 @@ public class ProductoDAO {
     }
 
     // CREATE: nuevo producto
-    public boolean insert(Productos p) {
+    public int insert(Productos p) {
 
         // Validaciones
-        if (p == null) return false;
-        if (p.getNombre() == null || p.getNombre().trim().isEmpty()) return false;
+        if (p == null) return -1;
+        if (p.getNombre() == null || p.getNombre().trim().isEmpty()) return -1;
 
         // Conexión
         String sql = """
@@ -59,7 +60,7 @@ public class ProductoDAO {
                 """;
 
         try (Connection con = BaseDatos.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql)) {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             // Rellenar los ? en orden
             ps.setString(1, p.getNombre());
@@ -71,14 +72,16 @@ public class ProductoDAO {
             // Ejecutar insertar
             ps.executeUpdate();
 
-            return true;
+            try (ResultSet keys = ps.getGeneratedKeys()) {
+                if (keys.next()) return keys.getInt(1);
+            }
 
         } catch (SQLException e) {
             System.err.println("Error al insertar producto");
             e.printStackTrace();
         }
 
-        return false;
+        return -1;
     }
 
     // DELETE: borrar producto
@@ -138,6 +141,4 @@ public class ProductoDAO {
         }
     }
 
-    public void delete(int id) {
-    }
 }

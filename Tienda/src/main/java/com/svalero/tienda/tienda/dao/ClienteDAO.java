@@ -45,13 +45,13 @@ public class ClienteDAO {
     }
 
     // CREATE: crear cliente
-    public boolean insert(Clientes c) {
+    public int insert(Clientes c) {
 
         // Validaciones
-        if (c == null) return false;
-        if (c.getNombre() == null || c.getNombre().trim().isEmpty()) return false;
-        if (c.getApellidos() == null || c.getApellidos().trim().isEmpty()) return false;
-        if (c.getEmail() == null || c.getEmail().trim().isEmpty()) return false;
+        if (c == null) return -1;
+        if (c.getNombre() == null || c.getNombre().trim().isEmpty()) return -1;
+        if (c.getApellidos() == null || c.getApellidos().trim().isEmpty()) return -1;
+        if (c.getEmail() == null || c.getEmail().trim().isEmpty()) return -1;
 
         // Conexión
         String sql = """
@@ -76,14 +76,16 @@ public class ClienteDAO {
             // Ejecutar insertar
             ps.executeUpdate();
 
-            return true;
+            try (ResultSet keys = ps.getGeneratedKeys()) {
+                if (keys.next()) return keys.getInt(1);
+            }
 
         } catch (SQLException e) {
             System.err.println("Error al insertar cliente");
             e.printStackTrace();
         }
 
-        return false;
+        return -1;
     }
 
     // DELETE: borrar cliente

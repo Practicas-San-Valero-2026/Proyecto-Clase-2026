@@ -73,4 +73,11 @@ public class Pedidos {
     public int getIdCliente() { return idCliente; }
 
     public void setIdCliente(int idCliente) { this.idCliente = idCliente; }
+
+    @Override
+    public String toString() {
+        String fecha = (fechaPedido == null) ? "" : fechaPedido.toString();
+        return numPedido + " - " + precio + "€ - " + fecha;
+    }
+
 }
