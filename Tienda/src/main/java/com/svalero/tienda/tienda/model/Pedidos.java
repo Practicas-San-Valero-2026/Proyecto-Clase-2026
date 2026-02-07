@@ -12,7 +12,8 @@ public class Pedidos {
     private String observaciones;
     private int idCliente;
 
-    public Pedidos(int id, String numPedido, boolean entregado, LocalDate fechaPedido, float precio, String observaciones, int idCliente) {
+    public Pedidos(int id, String numPedido, boolean entregado, LocalDate fechaPedido, float precio,
+                   String observaciones, int idCliente) {
         this.id = id;
         this.numPedido = numPedido;
         this.entregado = entregado;

@@ -67,4 +67,9 @@ public class Clientes {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
+
+    @Override
+    public String toString() {
+        return nombre + " " + apellidos;
+    }
 }

@@ -100,6 +100,8 @@ public class AppController implements Initializable {
 
 
     @FXML
+    private TextField idClienteField;
+    @FXML
     private TextField pedNumField;
     @FXML
     private CheckBox pedEntregadoCheckBox;
@@ -369,10 +371,7 @@ public class AppController implements Initializable {
         boolean entregado = pedEntregadoCheckBox.isSelected();
         LocalDate fecha = pedFechaDatePicker.getValue();
         String obs = pedObsTArea.getText();
-
-        // FIXME Se necesita idCliente REAL
-        // FIXME lo inicializo en 1 para probar*
-       // int idCliente = 1;
+        int idCliente = Integer.parseInt(idClienteField.getText());
 
         Pedidos pedido = new Pedidos(numPedido, entregado, fecha, precio, obs, idCliente);
 
