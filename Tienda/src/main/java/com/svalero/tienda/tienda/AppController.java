@@ -3,6 +3,7 @@ package com.svalero.tienda.tienda;
 import com.svalero.tienda.tienda.dao.ClienteDAO;
 import com.svalero.tienda.tienda.dao.PedidoDAO;
 import com.svalero.tienda.tienda.dao.ProductoDAO;
+import com.svalero.tienda.tienda.dao.VistaDAO;
 import com.svalero.tienda.tienda.model.Clientes;
 import com.svalero.tienda.tienda.model.Pedidos;
 import com.svalero.tienda.tienda.model.Productos;
@@ -14,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
@@ -46,6 +48,29 @@ public class AppController implements Initializable {
         cListView.setItems(clientesList);
         clientesList.setAll(cdao.findAll());
 
+        //FIXME RELLENAR COLUMNAS CON LOS DATOS
+
+        // columnas pedidos
+        vNumeroPedido.setCellValueFactory(new PropertyValueFactory<>("numeroPedido"));
+        vEntregado.setCellValueFactory(new PropertyValueFactory<>("entregado"));
+        vFechaPedido.setCellValueFactory(new PropertyValueFactory<>("fechaPedido"));
+        vPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        vObservaciones.setCellValueFactory(new PropertyValueFactory<>("observaciones"));
+
+        // columnas clientes
+        vNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        vApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        vFechaNacimiento.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
+        vEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        vTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+
+        // cargar datos
+        VistaDAO vdao = new VistaDAO();
+        ObservableList<Vista> vistaList = FXCollections.observableArrayList(vdao.readAll());
+
+        pedTableView.setItems(vistaList);
+        cliTableView.setItems(vistaList);
+
     }
 
     @FXML
@@ -65,7 +90,7 @@ public class AppController implements Initializable {
     @FXML
     private TableColumn<Vista,String> vNombre;
     @FXML
-    private TableColumn<Vista,String> Vapellidos;
+    private TableColumn<Vista,String> vApellidos;
     @FXML
     private TableColumn<Vista,LocalDate> vFechaNacimiento;
     @FXML
