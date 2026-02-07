@@ -372,9 +372,9 @@ public class AppController implements Initializable {
 
         // FIXME Se necesita idCliente REAL
         // FIXME lo inicializo en 1 para probar*
-        int idCliente = 1;
+       // int idCliente = 1;
 
-        Pedidos pedido = new Pedidos(0, numPedido, entregado, fecha, precio, obs, idCliente);
+        Pedidos pedido = new Pedidos(numPedido, entregado, fecha, precio, obs, idCliente);
 
         PedidoDAO dao = new PedidoDAO();
         int nuevoId = dao.insert(pedido);
