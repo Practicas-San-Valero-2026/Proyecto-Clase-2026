@@ -18,7 +18,7 @@ public class VistaDAO {
             SELECT p.numero_pedido, p.entregado, p.fecha_pedido, p.precio, p.observaciones,
                    c.nombre, c.apellidos, c.fecha_nacimiento, c.email, c.telefono
             FROM pedidos p
-            JOIN clientes c ON c.id = p.id_cliente
+            RIGHT JOIN clientes c ON c.id = p.id_cliente
             ORDER BY p.id DESC
             """;
 

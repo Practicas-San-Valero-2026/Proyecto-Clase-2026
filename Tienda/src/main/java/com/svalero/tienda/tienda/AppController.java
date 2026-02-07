@@ -47,12 +47,12 @@ public class AppController implements Initializable {
         ProductoDAO dao = new ProductoDAO();
         productosList.setAll(dao.findAll());
 
-        PedidoDAO pdao = new PedidoDAO();
         pedListView.setItems(pedidosList);
+        PedidoDAO pdao = new PedidoDAO();
         pedidosList.setAll(pdao.findAll());
 
-        ClienteDAO cdao = new ClienteDAO();
         cListView.setItems(clientesList);
+        ClienteDAO cdao = new ClienteDAO();
         clientesList.setAll(cdao.findAll());
 
 
@@ -200,6 +200,13 @@ public class AppController implements Initializable {
         if (pNombreField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("El nombre del producto es un campo obligatorio");
+            alert.show();
+            return;
+        }
+
+        if (pTipoField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("El tipo del producto es un campo obligatorio");
             alert.show();
             return;
         }
@@ -551,7 +558,9 @@ public class AppController implements Initializable {
         pedPrecioField.setText("");
         pedObsTArea.setText("");
         pedEntregadoCheckBox.setSelected(false);
-        pedFechaDatePicker.setEditable(false);
+        pedFechaDatePicker.setValue(null);
+        idClienteField.setText("");
+
 
     }
 
@@ -567,6 +576,8 @@ public class AppController implements Initializable {
         pedFechaDatePicker.setValue(p.getFechaPedido());
         pedPrecioField.setText(String.valueOf(p.getPrecio()));
         pedObsTArea.setText(p.getObservaciones());
+        idClienteField.setText(String.valueOf(p.getIdCliente()));
+
 
         pedModificarButton.setDisable(false);
         pedEliminarButton.setDisable(false);
@@ -725,7 +736,6 @@ public class AppController implements Initializable {
 
         showStatus("Cliente eliminado correctamente", 5);
 
-        // refrescar tablas
         refrescarTablas();
 
     }
