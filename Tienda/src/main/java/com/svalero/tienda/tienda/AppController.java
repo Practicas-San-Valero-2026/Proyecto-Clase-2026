@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
@@ -23,12 +24,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AppController {
+public class AppController implements Initializable {
 
     public AppController() {
         productosList = FXCollections.observableArrayList();
         pedidosList = FXCollections.observableArrayList();
         clientesList = FXCollections.observableArrayList();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        pListView.setItems(productosList);
+        ProductoDAO dao = new ProductoDAO();
+        productosList.setAll(dao.findAll());
+
+        PedidoDAO pdao = new PedidoDAO();
+        pedListView.setItems(pedidosList);
+        pedidosList.setAll(pdao.findAll());
+
+        ClienteDAO cdao = new ClienteDAO();
+        cListView.setItems(clientesList);
+        clientesList.setAll(cdao.findAll());
+
     }
 
     @FXML
@@ -128,21 +145,6 @@ public class AppController {
     private ListView cListView;
     private ObservableList<Clientes> clientesList = FXCollections.observableArrayList();
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        pListView.setItems(productosList);
-        ProductoDAO dao = new ProductoDAO();
-        productosList.setAll(dao.findAll());
-
-        pedListView.setItems(pedidosList);
-        PedidoDAO pdao = new PedidoDAO();
-        pedidosList.setAll(pdao.findAll());
-
-        ClienteDAO cdao = new ClienteDAO();
-        cListView.setItems(clientesList);
-        clientesList.setAll(cdao.findAll());
-
-    }
-
 
     // BOTONES PRODUCTOS
     @FXML
@@ -239,7 +241,7 @@ public class AppController {
         selected.setDescripcion(pDescripcionTArea.getText());
 
         ProductoDAO dao = new ProductoDAO();
-        dao.update(selected); // TODO HAY QUE IMPLEMENTARLO
+        int id = dao.insert(selected); // TODO HAY QUE IMPLEMENTARLO
 
         pListView.getSelectionModel().select(selected);
         showStatus("Producto modificado correctamente", 5);

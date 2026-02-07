@@ -74,10 +74,15 @@ public class ClienteDAO {
             ps.setInt(5, c.getTelefono());
 
             // Ejecutar insertar
-            ps.executeUpdate();
+            int filas = ps.executeUpdate();
 
-            try (ResultSet keys = ps.getGeneratedKeys()) {
-                if (keys.next()) return keys.getInt(1);
+            // Recuperar id
+            if (filas == 1) {
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    if (keys.next()) {
+                        return keys.getInt(1); // id generado
+                    }
+                }
             }
 
         } catch (SQLException e) {
