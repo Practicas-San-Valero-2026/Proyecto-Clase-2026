@@ -589,6 +589,11 @@ public class AppController implements Initializable {
             return;
         }
 
+        if (cEmailField.getText().trim().contains("@")) {
+            new Alert(Alert.AlertType.ERROR, "El formato del email es incorrecto");
+            return;
+        }
+
         String nombre = cNombreField.getText();
         String apellidos = cApellidosField.getText();
         LocalDate fecha = cFechaDatePicker.getValue();
@@ -641,6 +646,11 @@ public class AppController implements Initializable {
 
         if (cApellidosField.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Los apellidos del cliente son obligatorios").show();
+            return;
+        }
+
+        if (cEmailField.getText().trim().contains("@")) {
+            new Alert(Alert.AlertType.ERROR, "El formato del email es incorrecto");
             return;
         }
 
