@@ -47,12 +47,12 @@ public class AppController implements Initializable {
         ProductoDAO dao = new ProductoDAO();
         productosList.setAll(dao.findAll());
 
-        PedidoDAO pdao = new PedidoDAO();
         pedListView.setItems(pedidosList);
+        PedidoDAO pdao = new PedidoDAO();
         pedidosList.setAll(pdao.findAll());
 
-        ClienteDAO cdao = new ClienteDAO();
         cListView.setItems(clientesList);
+        ClienteDAO cdao = new ClienteDAO();
         clientesList.setAll(cdao.findAll());
 
 
@@ -200,6 +200,13 @@ public class AppController implements Initializable {
         if (pNombreField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("El nombre del producto es un campo obligatorio");
+            alert.show();
+            return;
+        }
+
+        if (pTipoField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("El tipo del producto es un campo obligatorio");
             alert.show();
             return;
         }
