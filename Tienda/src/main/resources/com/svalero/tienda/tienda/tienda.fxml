@@ -36,7 +36,7 @@
                         <Label layoutX="16.0" layoutY="41.0" text="Nombre*" />
                         <Label layoutX="23.0" layoutY="152.0" text="Stock" />
                         <Label layoutX="21.0" layoutY="118.0" text="Precio*" />
-                        <Label layoutX="26.0" layoutY="78.0" text="Tipo" />
+                        <Label layoutX="26.0" layoutY="78.0" text="Tipo*" />
                         <Label layoutX="17.0" layoutY="196.0" text="Descripción" />
                         <CheckBox fx:id="pStockCheckBox" disable="true" layoutX="84.0" layoutY="155.0" mnemonicParsing="false" />
                         <TextArea fx:id="pDescripcionTArea" editable="false" layoutX="84.0" layoutY="184.0" prefHeight="58.0" prefWidth="200.0" />
