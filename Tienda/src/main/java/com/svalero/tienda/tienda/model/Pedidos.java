@@ -23,6 +23,16 @@ public class Pedidos {
         this.idCliente = idCliente;
     }
 
+    public Pedidos(String numPedido, boolean entregado, LocalDate fechaPedido, float precio,
+                   String observaciones, int idCliente) {
+        this.numPedido = numPedido;
+        this.entregado = entregado;
+        this.fechaPedido = fechaPedido;
+        this.precio = precio;
+        this.observaciones = observaciones;
+        this.idCliente = idCliente;
+    }
+
     public Pedidos() {
 
     }
