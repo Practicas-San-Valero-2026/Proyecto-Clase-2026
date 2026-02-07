@@ -551,7 +551,9 @@ public class AppController implements Initializable {
         pedPrecioField.setText("");
         pedObsTArea.setText("");
         pedEntregadoCheckBox.setSelected(false);
-        pedFechaDatePicker.setEditable(false);
+        pedFechaDatePicker.setValue(null);
+        idClienteField.setText("");
+
 
     }
 
@@ -567,6 +569,8 @@ public class AppController implements Initializable {
         pedFechaDatePicker.setValue(p.getFechaPedido());
         pedPrecioField.setText(String.valueOf(p.getPrecio()));
         pedObsTArea.setText(p.getObservaciones());
+        idClienteField.setText(String.valueOf(p.getIdCliente()));
+
 
         pedModificarButton.setDisable(false);
         pedEliminarButton.setDisable(false);
@@ -725,7 +729,6 @@ public class AppController implements Initializable {
 
         showStatus("Cliente eliminado correctamente", 5);
 
-        // refrescar tablas
         refrescarTablas();
 
     }
