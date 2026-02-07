@@ -725,6 +725,7 @@ public class AppController implements Initializable {
 
         showStatus("Cliente eliminado correctamente", 5);
 
+        // refrescar tablas
         refrescarTablas();
 
     }
