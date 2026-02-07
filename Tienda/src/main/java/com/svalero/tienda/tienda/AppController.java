@@ -248,6 +248,7 @@ public class AppController implements Initializable {
             return;
         }
         pListView.refresh();
+        pListView.getSelectionModel().select(selected);
         showStatus("Producto modificado correctamente", 5);
 
     }
