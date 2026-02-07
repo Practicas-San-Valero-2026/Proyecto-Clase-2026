@@ -34,6 +34,13 @@ public class AppController implements Initializable {
         clientesList = FXCollections.observableArrayList();
     }
 
+    ObservableList<Vista> vistaList = FXCollections.observableArrayList();
+
+    private void refrescarTablas() {
+        VistaDAO vdao = new VistaDAO();
+        vistaList.setAll(vdao.findAll());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         pListView.setItems(productosList);
@@ -65,14 +72,12 @@ public class AppController implements Initializable {
         vTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
 
         // cargar datos
-        VistaDAO vdao = new VistaDAO();
-        ObservableList<Vista> vistaList = FXCollections.observableArrayList();
-
-        vistaList.setAll(vdao.findAll());
+        refrescarTablas();
         pedTableView.setItems(vistaList);
         cliTableView.setItems(vistaList);
 
     }
+
 
     @FXML
     private TableView<Vista> pedTableView;
@@ -419,6 +424,8 @@ public class AppController implements Initializable {
             return;
         }
 
+
+
         pedido.setId(nuevoId);
         pedidosList.add(pedido);
 
@@ -429,6 +436,7 @@ public class AppController implements Initializable {
         pedNuevoButton.setDisable(false);
         pedModificarButton.setDisable(false);
         limpiarCamposPedidos();
+        refrescarTablas();
 
     }
 
@@ -477,6 +485,8 @@ public class AppController implements Initializable {
         pedListView.getSelectionModel().select(selected);
         showStatus("Pedido modificado correctamente", 5);
 
+        refrescarTablas();
+
     }
 
     @FXML
@@ -511,6 +521,8 @@ public class AppController implements Initializable {
         desactivarCamposPedidos();
         showStatus("Pedido eliminado correctamente", 5);
 
+        refrescarTablas();
+
     }
 
     // activar campos de pedidos
@@ -520,6 +532,7 @@ public class AppController implements Initializable {
         pedObsTArea.setEditable(true);
         pedEntregadoCheckBox.setDisable(false);
         pedFechaDatePicker.setDisable(false);
+        idClienteField.setDisable(false);
     }
 
     // desactivar campos de pedidos
@@ -529,6 +542,7 @@ public class AppController implements Initializable {
         pedObsTArea.setEditable(false);
         pedEntregadoCheckBox.setDisable(true);
         pedFechaDatePicker.setDisable(true);
+        idClienteField.setDisable(true);
     }
 
     // Limpiar campos de pedidos
@@ -628,6 +642,8 @@ public class AppController implements Initializable {
         cModificarButton.setDisable(false);
         limpiarCamposClientes();
 
+        refrescarTablas();
+
     }
 
     @FXML
@@ -681,6 +697,8 @@ public class AppController implements Initializable {
         cListView.getSelectionModel().select(selected);
         showStatus("Cliente modificado correctamente", 5);
 
+        refrescarTablas();
+
     }
 
     @FXML
@@ -716,6 +734,8 @@ public class AppController implements Initializable {
         desactivarCamposClientes();
 
         showStatus("Cliente eliminado correctamente", 5);
+
+        refrescarTablas();
 
     }
 
