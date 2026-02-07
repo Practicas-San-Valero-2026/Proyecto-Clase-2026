@@ -51,12 +51,12 @@ public class PedidoDAO {
     }
 
     // CREATE: crear pedido
-    public boolean insert(Pedidos p) {
+    public int insert(Pedidos p) {
 
         // Validaciones
-        if (p == null) return false;
-        if (p.getNumPedido() == null) return false;
-        if (p.getFechaPedido() == null) return false;
+        if (p == null) return -1;
+        if (p.getNumPedido() == null) return -1;
+        if (p.getFechaPedido() == null) return -1;
 
         // Conexión
         String sql = """
@@ -82,14 +82,16 @@ public class PedidoDAO {
             // Ejecutar insertar
             ps.executeUpdate();
 
-            return true;
+            try (ResultSet keys = ps.getGeneratedKeys()) {
+                if (keys.next()) return keys.getInt(1);
+            }
 
         } catch (SQLException e) {
             System.err.println("Error al insertar pedido");
             e.printStackTrace();
         }
 
-        return false;
+        return -1;
     }
 
     // DELETE: borrar pedido

@@ -2,6 +2,7 @@ package com.svalero.tienda.tienda.dao;
 
 import com.svalero.tienda.tienda.basedatos.BaseDatos;
 import com.svalero.tienda.tienda.model.Productos;
+import org.mariadb.jdbc.Statement;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -145,6 +146,4 @@ public class ProductoDAO {
         }
     }
 
-    public void delete(int id) {
-    }
 }
