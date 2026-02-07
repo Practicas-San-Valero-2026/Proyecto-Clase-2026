@@ -15,7 +15,7 @@ public class PedidoDAO {
 
         String sql = """
                 SELECT p.id, p.numero_pedido, p.precio, p.fecha_pedido, p.entregado,
-                       p.observaciones, CONCAT(c.nombre, ' ', c.apellidos) AS cliente
+                       p.observaciones, CONCAT(c.nombre, ' ', c.apellidos) AS cliente, p.id_cliente
                 FROM pedidos p
                 JOIN clientes c ON c.id = p.id_cliente
                 """;
@@ -80,10 +80,15 @@ public class PedidoDAO {
             ps.setInt(6, p.getIdCliente());
 
             // Ejecutar insertar
-            ps.executeUpdate();
+            int filas = ps.executeUpdate();
 
-            try (ResultSet keys = ps.getGeneratedKeys()) {
-                if (keys.next()) return keys.getInt(1);
+            // Recuperar id
+            if (filas == 1) {
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    if (keys.next()) {
+                        return keys.getInt(1); // id generado
+                    }
+                }
             }
 
         } catch (SQLException e) {
