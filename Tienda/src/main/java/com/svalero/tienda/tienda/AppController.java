@@ -48,7 +48,7 @@ public class AppController implements Initializable {
         cListView.setItems(clientesList);
         clientesList.setAll(cdao.findAll());
 
-        //FIXME RELLENAR COLUMNAS CON LOS DATOS
+
 
         // columnas pedidos
         vNumeroPedido.setCellValueFactory(new PropertyValueFactory<>("numeroPedido"));
@@ -66,8 +66,9 @@ public class AppController implements Initializable {
 
         // cargar datos
         VistaDAO vdao = new VistaDAO();
-        ObservableList<Vista> vistaList = FXCollections.observableArrayList(vdao.readAll());
+        ObservableList<Vista> vistaList = FXCollections.observableArrayList();
 
+        vistaList.setAll(vdao.findAll());
         pedTableView.setItems(vistaList);
         cliTableView.setItems(vistaList);
 

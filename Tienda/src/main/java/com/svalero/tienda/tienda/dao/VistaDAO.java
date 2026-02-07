@@ -13,7 +13,7 @@ import java.util.List;
 
 public class VistaDAO {
 
-    public List<Vista> readAll() {
+    public List<Vista> findAll() {
         String sql = """
             SELECT p.numero_pedido, p.entregado, p.fecha_pedido, p.precio, p.observaciones,
                    c.nombre, c.apellidos, c.fecha_nacimiento, c.email, c.telefono
